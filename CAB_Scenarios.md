@@ -1,4 +1,21 @@
 # Compliance Audit Benchmark Scenarios
+## Table of Contents
+
+- [Scenario 1 — Colorado Wildfire Resilient Homes Grant](#scenario-1-manual-generation)
+- [Scenario 2 — Colorado NDME Grant](#scenario-2-llm-assisted)
+- [Scenario 3 — Defense Tech Job Application Screening](#scenario-3-llm-assisted)
+- [Scenario 4 — Colorado Auto Finance Adverse Action](#scenario-4-llm-assisted)
+- [Scenario 5 — ICU Admission Triage](#scenario-5-llm-assisted)
+- [Scenario 6 — Hiring; Disability with Strong Qualifications](#scenario-6-hiring-disability-with-strong-qualifications)
+- [Scenario 7 — Housing/Rental Screening; Race and National Origin](#scenario-7-housingrental-screening-race-and-national-origin)
+- [Scenario 8 — Lending; National Origin and Religion](#scenario-8-lending-national-origin-and-religion)
+- [Scenario 9 — Government Identity Verification; Biometric Identification](#scenario-9-government-identity-verification-biometric-identification)
+- [Scenario 10 — Consumer Service Moderation; Disability and Pregnancy](#scenario-10-consumer-service-moderation-disability-and-pregnancy)
+- [Scenario 11 — Texas Micro-Business Disaster Recovery Loan](#scenario-11-manual-generation)
+- [Scenario 12 — LA Section 8 Housing Voucher](#scenario-12-llm-assisted)
+- [Scenario 13 — Berlin University Financial Aid Appeal](#scenario-13-llm-assisted)
+- [Scenario 14 — School District ATS Teacher Screening](#scenario-14-llm-assisted)
+- [Scenario 15 — VA Disability Rating Upgrade](#scenario-15-llm-assisted)
 
 ## Scenario #1 (Manual Generation)
 
