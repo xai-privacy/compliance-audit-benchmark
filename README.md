@@ -2,6 +2,8 @@
 
 A benchmark for measuring legal compliance in Large Language Models (LLMs) through causal, counterfactual evaluation of high-stakes decision-making scenarios.
 
+This repo is part of the [XAI Privacy project](https://github.com/xai-privacy).
+
 ## Overview
 
 The Compliance Audit Benchmark (CAB) tests whether LLMs make decisions that adhere to privacy and AI laws by ensuring they do not rely on legally prohibited or irrelevant attributes. Each scenario is grounded in primary law sources and regulatory guidance, featuring:
