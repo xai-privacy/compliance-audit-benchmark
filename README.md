@@ -100,37 +100,40 @@ CAB measures:
 
 # Existing Benchmarks
 
-Each link contains information about an existing benchmark in the legal and casuality domains (mostly legal). Some benchmarks are within both, but most are either in one or the other.
+Benchmarks are sorted into four different categories, either legal, causal, physical, or logical. Each category contains only a few benchmarks that are representative of the different tasks found in the domain. The names of ommited benchmarks are included at the end of the category.
 
-Swiss Judgment Prediction (SJP) - https://arxiv.org/abs/2402.17013. An LJP dataset extended with expert-written rationales. For 108 cases, a model's predicted outcame and reasoning can be checked against a legal expert. The paper itself introduces an evaluation method called Lower Court Insertion, which intervenes on the case input by inserting the lower court's identity and measures how much that single factor shifts the model's prediction (testing how much of the model's desicion is driven by a legally irrelevant factor.)
+## Legal and Legal Causality
 
-LexGLUE - https://github.com/coastalcph/lex-glue. A legal-centered benchmark comprising of legal NLU tasks, such as case classification, contract clause classification, multi-label EU law classification. 
-Sources/cases are drawn from the US, EU, and Council of Europe legal sources.
+- Swiss Judgment Prediction (SJP) - https://arxiv.org/abs/2402.17013. An LJP dataset extended with expert-written rationales. For 108 cases, a model's predicted outcame and reasoning can be checked against a legal expert. The paper itself introduces an evaluation method called Lower Court Insertion, which intervenes on the case input by inserting the lower court's identity and measures how much that single factor shifts the model's prediction (testing how much of the model's desicion is driven by a legally irrelevant factor.)
+- LegalBench - https://arxiv.org/abs/2308.11462 (also tracked live at https://www.vals.ai/benchmarks/legal_bench). A collection of 162 legal tasks spanning 6 different types of reasoning, measuring either
+skills relevant to the practice of law or skills that legal experts find interesting. 
+- CUAD (Contract Understanding Atticus Dataset) - https://github.com/TheAtticusProject/cuad. A contract review benchmark of 510 commercial legal contracts with 13,000+ expert annotations. Used to evaluate model's performance in extracting and highlighting specific clauses in contracts.
+- LEXam - https://huggingface.co/datasets/LEXam-Benchmark/LEXam. A legal reasoning benchmark built from actual Swiss law exam questions, with both MCQ and open ended questions.
+- Legal LLM Benchmark - https://github.com/Marvin-Cypher/LLM-for-LLM. A benchmark for evaluating 12 different LLMs across 163 real world legal tasks. It specifically highlights scenarios where models would refuse to answer legal questions when phrased adversarially.
 
-LegalBench - https://arxiv.org/abs/2308.11462 (also tracked live at https://www.vals.ai/benchmarks/legal_bench). A collection of 162 legal tasks spanning 6 different types of reasoning, measuring either
-skills relevant to the practice of law or skills that legal experts find interesting.
+Benchmarks ommited in this section are LexGLUE, CaseHOLD, MAUD, ACORD, Harvey's Legal Agent Bench, MultiEURLEX, LexEval, ContractNLI, CAIL2018, LEVEN, and AnnoCaseLaw. Each of these benchmarks overlaps in task with one or more of the benchmarks here.
 
-CaseHOLD - https://arxiv.org/abs/2104.08671. A benchmark introduced as a way to show the effectiveness of domain pretraining. It contains ~53,000 multiple choice questions where the model has to pick the correct holding statement given citing context. Included in LexGLUE as a component task
+## Text Based Causality
 
-CUAD (Contract Understanding Atticus Dataset) - https://github.com/TheAtticusProject/cuad. A contract review benchmark of 510 commercial legal contracts with 13,000+ expert annotations. Used to evaluate model's performance in extracting and highlighting specific clauses in contracts.
+- Corr2Cause — https://arxiv.org/abs/2306.05836. A 200,000+ example benchmark that tests whether models can correctly infer valid causal relationships from purely correlational statements.
+- CRAB (Causal Reasoning Assessment Benchmark) - https://arxiv.org/abs/2311.04284. A benchmark of ~2,700 fine grained, contextually annotated real-world event pairs used to test causal discovery, responsibility assessment, and multi-document causal reasoning.
 
-MAUD (Merger Agreement Understanding Dataset) - https://www.atticusprojectai.org/datasets/. Similar to CUAD in it's tasks but centered around Merger Agreements.
+Benchmarks ommited in this section are CausalBench, e-CARE, CLadder, BIG-Bench Causal Judgment, and EconCausal.
 
-ACORD (Atticus Clause Retrieval Dataset) - https://www.atticusprojectai.org/datasets/. A contract clause retrival benchmark with 126,000+ query-clause pairs. Used to evaluate retrival of relevant contract language, given a natural language prompt.
+## Physical Reasoning
 
-LEXam - https://huggingface.co/datasets/LEXam-Benchmark/LEXam. A legal reasoning benchmark built from actual Swiss law exam questions, with both MCQ and open ended questions.
+- CLEVRER - https://arxiv.org/abs/1910.01442. A video QA benchmark of object collision videos, along with descriptions and counterfactual questions. Standard reference benchmark for causal reasoning on physical events.
+- PHYRE (PHYsical REasoning) - https://arxiv.org/abs/1908.05656. A set of 2D physics puzzles where a model must achieve a desired end state by place objects. Similar to CLEVRER but a model must take an action to create a state whereas CLEVRER is a simple Q&A.
 
-Legal LLM Benchmark - https://github.com/Marvin-Cypher/LLM-for-LLM. A benchmark for evaluating 12 different LLMs across 163 real world legal tasks. It specifically highlights scenarios where models would refuse to answer legal questions when phrased adversarially.
+Benchmarks ommited in this section are CRAFT, CausalWorld, IntPhys2.
 
-Corr2Cause — https://arxiv.org/abs/2306.05836. A 200,000+ example benchmark that tests whether models can correctly infer valid causal relationships from purely correlational statements.
+## Logical Reasoning
 
-CausalBench — https://huggingface.co/datasets/CCLV/CausalBench. A benchmark spanning textual, mathematical, and coding domains that tests for causal understanding from four angles: cause-to-effect, effect-to-cause, and both with intervention.
+- FOLIO - https://arxiv.org/abs/1908.05656. A set of 1,430 expert written nautral language inference examples, each annotated. It tests the model's ability to translate natural language into formal logic.
+- ReClor - https://arxiv.org/abs/2002.04326. A reading comprehension benchmark build from LSAT and GMAT logical reasoning sections. Tests logic puzzle type questions and is representative of exam-derived benchmarks
 
-CRAB (Causal Reasoning Assessment Benchmark) - https://arxiv.org/abs/2311.04284. A benchmark of ~2,700 fine grained, contextually annotated real-world event pairs used to test causal discovery, responsibility assessment, and multi-document causal reasoning.
+Benchmarks ommited in this section are LogiQA, and AR-LSAT.
 
-e-CARE (Explainable CAusal REasoning) - https://github.com/Waste-Wood/e-CARE. A human-annotated dataset with 21,000+ causal reasoning questions, each paired with a natural-language explanation of the causal relationship. Used to test both causal prediction and explanation generation.
-
-Some existing benchmarks in the legal domain are ommited as they are too similar to ones listed here. Many benchmarks exist in either legal or causal domain, but the SJP is one of the only benchmarks that encorperates both.
 
 
 
