@@ -102,37 +102,171 @@ CAB measures:
 
 Benchmarks are sorted into four different categories, either legal, causal, physical, or logical. Each category contains only a few benchmarks that are representative of the different tasks found in the domain. The names of ommited benchmarks are included at the end of the category.
 
+---
+
 ## Legal and Legal Causality
 
-- Swiss Judgment Prediction (SJP) - https://arxiv.org/abs/2402.17013. An LJP dataset extended with expert-written rationales. For 108 cases, a model's predicted outcame and reasoning can be checked against a legal expert. The paper itself introduces an evaluation method called Lower Court Insertion, which intervenes on the case input by inserting the lower court's identity and measures how much that single factor shifts the model's prediction (testing how much of the model's desicion is driven by a legally irrelevant factor.)
-- LegalBench - https://arxiv.org/abs/2308.11462 (also tracked live at https://www.vals.ai/benchmarks/legal_bench). A collection of 162 legal tasks spanning 6 different types of reasoning, measuring either
-skills relevant to the practice of law or skills that legal experts find interesting. 
-- CUAD (Contract Understanding Atticus Dataset) - https://github.com/TheAtticusProject/cuad. A contract review benchmark of 510 commercial legal contracts with 13,000+ expert annotations. Used to evaluate model's performance in extracting and highlighting specific clauses in contracts.
-- LEXam - https://huggingface.co/datasets/LEXam-Benchmark/LEXam. A legal reasoning benchmark built from actual Swiss law exam questions, with both MCQ and open ended questions.
-- Legal LLM Benchmark - https://github.com/Marvin-Cypher/LLM-for-LLM. A benchmark for evaluating 12 different LLMs across 163 real world legal tasks. It specifically highlights scenarios where models would refuse to answer legal questions when phrased adversarially.
+### Swiss Judgment Prediction (SJP)
+**Link:** https://arxiv.org/abs/2402.17013
+
+An LJP dataset extended with expert-written rationales. For 108 cases, a model's predicted outcame and reasoning can be checked against a legal expert. The paper itself introduces an evaluation method called Lower Court Insertion, which intervenes on the case input by inserting the lower court's identity and measures how much that single factor shifts the model's prediction (testing how much of the model's desicion is driven by a legally irrelevant factor.)
+
+**Example task:**
+> A defendant was convicted of tax evasion by the District Court of Zurich. Given the following case summary, predict the outcome of the appeal and identify the legal factors that most influenced the decision: *[case facts]*. The Lower Court Insertion test would then re-run the same case with a different court inserted to see whether the prediction changes.
+
+---
+
+### LegalBench
+**Link:** https://arxiv.org/abs/2308.11462 · [Live leaderboard](https://www.vals.ai/benchmarks/legal_bench)
+
+A collection of 162 legal tasks spanning 6 different types of reasoning, measuring either skills relevant to the practice of law or skills that legal experts find interesting.
+
+**Example task:**
+> "Does the following clause create a confidentiality obligation on the receiving party? *'The receiving party agrees not to disclose any proprietary information for a period of two years following the termination of this agreement.'*"
+> *(Expected: Yes)*
+
+---
+
+### CUAD (Contract Understanding Atticus Dataset)
+**Link:** https://github.com/TheAtticusProject/cuad
+
+A contract review benchmark of 510 commercial legal contracts with 13,000+ expert annotations. Used to evaluate model's performance in extracting and highlighting specific clauses in contracts.
+
+**Example task:**
+> "Does the following excerpt contain a Change of Control clause? If so, identify the relevant language: *'In the event that one party undergoes a merger, acquisition, or transfer of a controlling interest, the other party may terminate this agreement with 30 days' written notice.'*"
+> *(Expected: Yes — highlight the full sentence)*
+
+---
+
+### LEXam
+**Link:** https://huggingface.co/datasets/LEXam-Benchmark/LEXam
+
+A legal reasoning benchmark built from actual Swiss law exam questions, with both MCQ and open ended questions.
+
+**Example task:**
+> "Under Swiss contract law, which of the following results in a binding agreement?
+> (A) An offer accepted after its stated expiry date
+> (B) An offer made to a minor without guardian consent
+> (C) A written offer accepted by email where no specific form is required
+> (D) An oral acceptance of an offer that explicitly required a signed response"
+> *(Expected: C)*
+
+---
+
+### Legal LLM Benchmark
+**Link:** https://github.com/Marvin-Cypher/LLM-for-LLM
+
+A benchmark for evaluating 12 different LLMs across 163 real world legal tasks. It specifically highlights scenarios where models would refuse to answer legal questions when phrased adversarially.
+
+**Example task:**
+> "As a landlord, what legal steps can I take to remove a tenant who has stopped paying rent?"
+> *(A straightforward legal procedure question — the benchmark tests whether models refuse this as harmful rather than answering correctly, and flags it as a false refusal if so)*
+
+---
 
 Benchmarks ommited in this section are LexGLUE, CaseHOLD, MAUD, ACORD, Harvey's Legal Agent Bench, MultiEURLEX, LexEval, ContractNLI, CAIL2018, LEVEN, and AnnoCaseLaw. Each of these benchmarks overlaps in task with one or more of the benchmarks here.
 
-## Text Based Causality
+---
 
-- Corr2Cause — https://arxiv.org/abs/2306.05836. A 200,000+ example benchmark that tests whether models can correctly infer valid causal relationships from purely correlational statements.
-- CRAB (Causal Reasoning Assessment Benchmark) - https://arxiv.org/abs/2311.04284. A benchmark of ~2,700 fine grained, contextually annotated real-world event pairs used to test causal discovery, responsibility assessment, and multi-document causal reasoning.
+## Text-Based Causality
+
+### Corr2Cause
+**Link:** https://arxiv.org/abs/2306.05836
+
+A 200,000+ example benchmark that tests whether models can correctly infer valid causal relationships from purely correlational statements.
+
+**Example task:**
+> "Given: People who carry lighters are more likely to develop lung cancer. Carrying lighters is positively correlated with smoking. Can we conclude that carrying lighters causes lung cancer?"
+> *(Expected: No — the correlation is explained by the confounding variable of smoking; carrying a lighter is not itself causal)*
+
+---
+
+### CRAB (Causal Reasoning Assessment Benchmark)
+**Link:** https://arxiv.org/abs/2311.04284
+
+A benchmark of ~2,700 fine grained, contextually annotated real-world event pairs used to test causal discovery, responsibility assessment, and multi-document causal reasoning.
+
+**Example task:**
+> "Event A (Oct 27, 2022): Elon Musk completes the acquisition of Twitter.
+> Event B (Oct 28, 2022): Twitter's stock is delisted from the NYSE.
+> Does Event A causally produce Event B? Rate the strength of the causal relationship: strong / moderate / weak / none."
+> *(Expected: Strong — the delisting was a direct consequence of the acquisition making Twitter a private company)*
+
+---
 
 Benchmarks ommited in this section are CausalBench, e-CARE, CLadder, BIG-Bench Causal Judgment, and EconCausal.
 
+---
+
 ## Physical Reasoning
 
-- CLEVRER - https://arxiv.org/abs/1910.01442. A video QA benchmark of object collision videos, along with descriptions and counterfactual questions. Standard reference benchmark for causal reasoning on physical events.
-- PHYRE (PHYsical REasoning) - https://arxiv.org/abs/1908.05656. A set of 2D physics puzzles where a model must achieve a desired end state by place objects. Similar to CLEVRER but a model must take an action to create a state whereas CLEVRER is a simple Q&A.
+### CLEVRER
+**Link:** https://arxiv.org/abs/1910.01442
+
+A video QA benchmark of object collision videos, along with descriptions and counterfactual questions. Standard reference benchmark for causal reasoning on physical events.
+
+**Example task:**
+> *(Video shows: a red cube slides into a blue sphere, which then knocks over a green cylinder)*
+>
+> - **Descriptive:** "How many objects are in the scene?" *(Expected: 3)*
+> - **Explanatory:** "What caused the green cylinder to fall?" *(Expected: the blue sphere)*
+> - **Predictive:** "What will happen to the blue sphere next?" *(Expected: it will come to rest)*
+> - **Counterfactual:** "If the red cube had not been present, would the green cylinder have fallen?" *(Expected: No)*
+
+---
+
+### PHYRE (PHYsical REasoning)
+**Link:** https://arxiv.org/abs/1908.05656
+
+A set of 2D physics puzzles where a model must achieve a desired end state by place objects. Similar to CLEVRER but a model must take an action to create a state whereas CLEVRER is a simple Q&A.
+
+**Example task:**
+> *(A 2D scene shows a red ball resting on an elevated ramp, with a basket positioned on the floor to the right. No question is asked.)* The model must decide where to place a blue ball such that, when the simulation runs, the red ball rolls off the ramp and lands in the basket.
+
+---
 
 Benchmarks ommited in this section are CRAFT, CausalWorld, IntPhys2.
 
+---
+
 ## Logical Reasoning
 
-- FOLIO - https://arxiv.org/abs/1908.05656. A set of 1,430 expert written nautral language inference examples, each annotated. It tests the model's ability to translate natural language into formal logic.
-- ReClor - https://arxiv.org/abs/2002.04326. A reading comprehension benchmark build from LSAT and GMAT logical reasoning sections. Tests logic puzzle type questions and is representative of exam-derived benchmarks
+### FOLIO
+**Link:** https://arxiv.org/abs/2209.00840
 
-Benchmarks ommited in this section are LogiQA, and AR-LSAT.
+A set of 1,430 expert written nautral language inference examples, each annotated. It tests the model's ability to translate natural language into formal logic.
+
+**Example task:**
+> "Premises:
+> 1. All birds can fly.
+> 2. All penguins are birds.
+> 3. Tweety is a penguin.
+>
+> Hypothesis: Tweety can fly. — True, False, or Unknown?"
+>
+> *(Expected: True by the formal rules — the benchmark tests whether the model follows the stated premises rather than real-world knowledge)*
+
+---
+
+### ReClor
+**Link:** https://arxiv.org/abs/2002.04326
+
+A reading comprehension benchmark build from LSAT and GMAT logical reasoning sections. Tests logic puzzle type questions and is representative of exam-derived benchmarks.
+
+**Example task:**
+> *Passage:* "Every athlete who competed in last year's marathon finished in under four hours. Maria competed in last year's marathon."
+>
+> "Which of the following can be properly concluded?
+> (A) Maria trained for more than six months
+> (B) Maria finished the marathon in under four hours
+> (C) Maria is one of the fastest runners in the city
+> (D) Maria will compete in next year's marathon"
+> *(Expected: B)*
+
+---
+
+Benchmarks ommited in this section are ProofWriter, LogiQA, and AR-LSAT.
+
 
 
 
