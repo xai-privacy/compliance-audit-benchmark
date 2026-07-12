@@ -111,6 +111,8 @@ Benchmarks are sorted into four different categories, either legal, causal, phys
 
 An LJP dataset extended with expert-written rationales. For 108 cases, a model's predicted outcame and reasoning can be checked against a legal expert. The paper itself introduces an evaluation method called Lower Court Insertion, which intervenes on the case input by inserting the lower court's identity and measures how much that single factor shifts the model's prediction (testing how much of the model's desicion is driven by a legally irrelevant factor.)
 
+**Creation Methodology:** First, a set of 80,000 cases were gathered from the publicly available Swiss Federal Supreme Court database. Then, 3 legal experts (2 master's students in law and one practicing lawyer) manually annotated the 108 cases, highlighting important clauses/sections in the cases. No synthetic generation occured.
+
 **Example task:**
 > A defendant was convicted of tax evasion by the District Court of Zurich. Given the following case summary, predict the outcome of the appeal and identify the legal factors that most influenced the decision: *[case facts]*. The Lower Court Insertion test would then re-run the same case with a different court inserted to see whether the prediction changes.
 
@@ -120,6 +122,8 @@ An LJP dataset extended with expert-written rationales. For 108 cases, a model's
 **Link:** https://arxiv.org/abs/2308.11462 · [Live leaderboard](https://www.vals.ai/benchmarks/legal_bench)
 
 A collection of 162 legal tasks spanning 6 different types of reasoning, measuring either skills relevant to the practice of law or skills that legal experts find interesting.
+
+**Creation Methodology:** Built through a collaborative process, where in August 2022, the organizers published a public call for tasks distributed through legal and computational mailing lists and conferences. Around 40 contributors from academia, legal practice, and computational legal research each manually created a task, sourcing data from 36 existing legal datasets or creating new ones. Tasks were checked for legal correctness and task validity by the organizers, and no synthetic generation was used.
 
 **Example task:**
 > "Does the following clause create a confidentiality obligation on the receiving party? *'The receiving party agrees not to disclose any proprietary information for a period of two years following the termination of this agreement.'*"
@@ -132,6 +136,8 @@ A collection of 162 legal tasks spanning 6 different types of reasoning, measuri
 
 A contract review benchmark of 510 commercial legal contracts with 13,000+ expert annotations. Used to evaluate model's performance in extracting and highlighting specific clauses in contracts.
 
+**Creation Methodology:**Built through a fully human-annotated effort coordinated by The Atticus Project. Law student annotators each completed 70–100 hours of training before labeling, including video workshops led by experienced lawyers. Every annotation was then independently verified by 3 additional annotators. No synthetic generation was used at any stage; the combined efforts of all involved is likely a ceiling for annotation quality.
+
 **Example task:**
 > "Does the following excerpt contain a Change of Control clause? If so, identify the relevant language: *'In the event that one party undergoes a merger, acquisition, or transfer of a controlling interest, the other party may terminate this agreement with 30 days' written notice.'*"
 > *(Expected: Yes — highlight the full sentence)*
@@ -142,6 +148,8 @@ A contract review benchmark of 510 commercial legal contracts with 13,000+ exper
 **Link:** https://huggingface.co/datasets/LEXam-Benchmark/LEXam
 
 A legal reasoning benchmark built from actual Swiss law exam questions, with both MCQ and open ended questions.
+
+**Creation Methodology:** Built from the collection of 340 real law school exams across 116 courses at Swiss universities, covering Swiss, European, and international law. No annotation or synthetic generation was required, all of the questions and reference answers already existed as part of normal academic assessments.
 
 **Example task:**
 > "Under Swiss contract law, which of the following results in a binding agreement?
@@ -157,6 +165,8 @@ A legal reasoning benchmark built from actual Swiss law exam questions, with bot
 **Link:** https://github.com/Marvin-Cypher/LLM-for-LLM
 
 A benchmark for evaluating 12 different LLMs across 163 real world legal tasks. It specifically highlights scenarios where models would refuse to answer legal questions when phrased adversarially.
+
+**Creation Methodology:** First, 100 Legal Q&A questions were written by the authors of the benchmark, pulling from law school materials and bar exam guides. Then, 39 legal documents from public repositories were pulled and modified to have missing data and used as tasks. Next, 24 questions were pulled from a HuggingFace dataset called FalseReject, and once all questions were compiled, GPT-4o evaluated all of them. Finally, human validators annotated 30% of them to check if the automated scoring was accurate.
 
 **Example task:**
 > "As a landlord, what legal steps can I take to remove a tenant who has stopped paying rent?"
@@ -175,6 +185,8 @@ Benchmarks ommited in this section are LexGLUE, CaseHOLD, MAUD, ACORD, Harvey's 
 
 A 200,000+ example benchmark that tests whether models can correctly infer valid causal relationships from purely correlational statements.
 
+**Creation Methodology:** Built entirely synthetically through a three step process. First, variables are selected, and relationships between the variables are chosen (for example, A causes B causes C). Then, the relationships are evalulated to find all instances of correlated variables, but not variables that neccessarily cause one another (for example, C is not caused by A, but the two are correlated). Then, these relationships are turned into natural language. 
+
 **Example task:**
 > "Given: People who carry lighters are more likely to develop lung cancer. Carrying lighters is positively correlated with smoking. Can we conclude that carrying lighters causes lung cancer?"
 > *(Expected: No — the correlation is explained by the confounding variable of smoking; carrying a lighter is not itself causal)*
@@ -185,6 +197,8 @@ A 200,000+ example benchmark that tests whether models can correctly infer valid
 **Link:** https://arxiv.org/abs/2311.04284
 
 A benchmark of ~2,700 fine grained, contextually annotated real-world event pairs used to test causal discovery, responsibility assessment, and multi-document causal reasoning.
+
+**Creation Methodology:** Built through a three step process. First, 173 news documents covering 20 newsworthy stories were collected. Second, causal judgments between event pairs were crowdsourced (workers scored each pair 0–100). Third, pairs where the crowdsourced scores had high variance were flagged for expert review (roughly 30%), and 3 expert annotators (NLP researchers with causal inference expertise) reannotated those pairs.
 
 **Example task:**
 > "Event A (Oct 27, 2022): Elon Musk completes the acquisition of Twitter.
@@ -205,6 +219,8 @@ Benchmarks ommited in this section are CausalBench, e-CARE, CLadder, BIG-Bench C
 
 A video QA benchmark of object collision videos, along with descriptions and counterfactual questions. Standard reference benchmark for causal reasoning on physical events.
 
+**Creation Methodology**: Built entirely synthetically, where videos are generated by a physics engine simulating Newtonian object motion and collisions, then rendered into frames. All four question types (descriptive, explanatory, predictive, counterfactual) and their answers are generated algorithmically from the simulation's ground-truth event records. 
+
 **Example task:**
 > *(Video shows: a red cube slides into a blue sphere, which then knocks over a green cylinder)*
 >
@@ -219,6 +235,8 @@ A video QA benchmark of object collision videos, along with descriptions and cou
 **Link:** https://arxiv.org/abs/1908.05656
 
 A set of 2D physics puzzles where a model must achieve a desired end state by place objects. Similar to CLEVRER but a model must take an action to create a state whereas CLEVRER is a simple Q&A.
+
+**Creation Methodology**: Built from 25 hand-authored templates, each defining a class of physical scenario (objects, goal relationship). Concrete tasks were then created from each template by varying object positions and sizes, yielding 100 tasks per template (2,500 total). The physics simulation itself (Newtonian 2D) serves as the ground truth — no annotation is needed because the simulator determines whether the goal state is reached. Human verification was conducted to confirm that puzzles were solvable and comprehensible by humans before release.
 
 **Example task:**
 > *(A 2D scene shows a red ball resting on an elevated ramp, with a basket positioned on the floor to the right. No question is asked.)* The model must decide where to place a blue ball such that, when the simulation runs, the red ball rolls off the ramp and lands in the basket.
@@ -236,6 +254,8 @@ Benchmarks ommited in this section are CRAFT, CausalWorld, IntPhys2.
 
 A set of 1,430 expert written nautral language inference examples, each annotated. It tests the model's ability to translate natural language into formal logic.
 
+**Creation Methodology**: Fully human-annotated by a pool of college and graduate students who were required to have either native or near-native English proficiency and formal training in first-order logic (by coursework or self-study). A quality check was also applied, where NL and FOL quality and correctness was checked by experts. As a final automated safeguard, all FOL annotations were verified by a theorem prover, ensuring that labels are provably correct rather than just agreed upon by annotators. 
+
 **Example task:**
 > "Premises:
 > 1. All birds can fly.
@@ -252,6 +272,8 @@ A set of 1,430 expert written nautral language inference examples, each annotate
 **Link:** https://arxiv.org/abs/2002.04326
 
 A reading comprehension benchmark build from LSAT and GMAT logical reasoning sections. Tests logic puzzle type questions and is representative of exam-derived benchmarks.
+
+**Creation Methodology**: Built directly from publicly available LSAT and GMAT exam materials. 91.22% from official exams, and the remainder from high-quality practice exams. No annotation of answers was required since official answer keys already existed. The only human effort beyond collection was researchers manually categorizing the test set into 17 question types.
 
 **Example task:**
 > *Passage:* "Every athlete who competed in last year's marathon finished in under four hours. Maria competed in last year's marathon."
