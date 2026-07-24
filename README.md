@@ -287,10 +287,54 @@ A reading comprehension benchmark build from LSAT and GMAT logical reasoning sec
 
 ---
 
-Benchmarks ommited in this section are ProofWriter, LogiQA, and AR-LSAT.
+Benchmarks ommited in this section are LogiQA and AR-LSAT. ProofWriter, which was previously ommited, is now included in the deductive reasoning section below.
+
+## Deductive Reasoning
+
+### SARA (Statutory Reasoning Assessment)
+
+A deductive reasoning benchmark of US federal tax law. Simplified sections of the Internal Revenue Code are given, then models must determine if a natural language claim about a specific case follows, or compute the total tax owed if applicable. 
+
+**Creation Methodology**: Built by selecting 9 sections of the IRC, simplifying them to be self contained, then manually authoring two natural language paragraphs per subsection, one where the statute applies and one where it doesn't. This work was done by researchers at John Hopkins, including one law professor. A total of 376 cases were created, and the cases were double checked by both the law professor and a solver program. No synthetic generation of any kind was used.
+
+**Example Task**
+>Statute: "§152(d)(2): An individual is a qualifying relative of a taxpayer if (A) such individual is not a qualifying >child of such taxpayer or of any other taxpayer for any taxable year beginning in the calendar year in which the taxable >year of the taxpayer begins, and (B) the individual bears a relationship to the taxpayer described in subparagraph (A) >through (H)..."
+>Case: "Alice's adult sister lives with her and earns no income. Alice provides all of her support."
+>"Does §152 apply — is Alice's sister Alice's qualifying relative? Entailment or Contradiction?" (Expected: Entailment)
+
+---
+
+### DeonticBench
+
+A benchmark of 6,232 deontic reasoning tasks across four real world domains: US federal taxes, airline baggage policies, US immigration appeals, and US state housing law, extending SARA into three more domains. The benchmark also ships with reference Prolog code, enabling DSL-type workflow where the model generates executable Prolog, which is then run by a solver. 
+
+**Creation Methodology**: Built by combining three datasets with a newly constructed immigration datset (USCIS-AAO); SARA (for tax), a subset of RuleArena (for airline policy), and HousingStatuteQA (for housing laws). The new immigration dataset was built by sampling from 6,483 valid Administrative Appeals Office decisions from 2022 to 2025. GPT-5-mini then extracted the important facts, and the samples chosen were then manually reviewed. 
+
+**Example Task**
+>Airline policy: "Passengers traveling in Basic Economy are not entitled to a free checked bag. Each checked bag costs $35 >for the first, $45 for the second..."
+>Case: "Passenger books a Basic Economy fare on [airline]. They check 2 bags, each under 50 lbs."
+>"What is the total baggage fee?"(Expected: $80)
+
+---
+
+### ProofWriter
+
+A large benchmark of natural language rulesets paired with True/False/Unknown questions and multi-step proof chains. A small theory expressed in natural language is given, and a model must determine whether the conclusion follows and produce a step-by-step proof. ProofWriter is unique in that it requires models to generate a proof, the trace of reasoning, instead of just the result.
+
+**Creation Methodology**: Built entirely synthetically, through templates. Random sets of natural language rules are made ("All [entity] are [property], [name] is a(n) [entity]", etc), then a symbolic theorem prover computes all valid entailments and their proffs at each specificed depth. Around 100k tasks were created throughout various depths. A crowdsourced variant (ParaRules) also exists, in which the template-generated sentences are rewritten by crowdworkers to increase natural language flow, without changing the logical structure.
+
+**Example Task**
+
+>Theory:
+>All mammals are warm-blooded.
+>All dogs are mammals.
+>Rex is a dog.
+>Question: "Is Rex warm-blooded? True, False, or Unknown?" (Expected: True — requires chaining rules 1→2→3)
+
+Benchmarks ommitted in this section are MASLegalBench and RuleTaker.
 
 
-
+---
 
 
 
